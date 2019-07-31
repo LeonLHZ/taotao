@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pmm.mapper.WorkExperienceMapper" >
+  <resultMap id="BaseResultMap" type="com.pmm.pojo.WorkExperience" >
+    <result column="work_experience_id" property="workExperienceId" jdbcType="VARCHAR" />
+    <result column="work_experience_company" property="workExperienceCompany" jdbcType="VARCHAR" />
+    <result column="work_experience_department" property="workExperienceDepartment" jdbcType="VARCHAR" />
+    <result column="work_experience_responsibility" property="workExperienceResponsibility" jdbcType="VARCHAR" />
+    <result column="work_experience_starttime" property="workExperienceStarttime" jdbcType="VARCHAR" />
+    <result column="work_experience_overtime" property="workExperienceOvertime" jdbcType="VARCHAR" />
+    <result column="personal_messages_id" property="personalMessagesId" jdbcType="VARCHAR" />
+    <result column="work_experience_reserved1" property="workExperienceReserved1" jdbcType="VARCHAR" />
+    <result column="work_experience_reserved2" property="workExperienceReserved2" jdbcType="VARCHAR" />
+    <result column="work_experience_reserved3" property="workExperienceReserved3" jdbcType="VARCHAR" />
+    <result column="work_experience_reserved4" property="workExperienceReserved4" jdbcType="VARCHAR" />
+    <result column="work_experience_reserved5" property="workExperienceReserved5" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.pmm.pojo.WorkExperience" extends="BaseResultMap" >
+    <result column="work_experience_description" property="workExperienceDescription" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    work_experience_id, work_experience_company, work_experience_department, work_experience_responsibility, 
+    work_experience_starttime, work_experience_overtime, personal_messages_id, work_experience_reserved1, 
+    work_experience_reserved2, work_experience_reserved3, work_experience_reserved4, 
+    work_experience_reserved5
+  </sql>
+  <sql id="Blob_Column_List" >
+    work_experience_description
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.pmm.pojo.WorkExperienceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from work_experience
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pmm.pojo.WorkExperienceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from work_experience
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.pmm.pojo.WorkExperienceExample" >
+    delete from work_experience
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pmm.pojo.WorkExperience" >
+    insert into work_experience (work_experience_id, work_experience_company, 
+      work_experience_department, work_experience_responsibility, 
+      work_experience_starttime, work_experience_overtime, 
+      personal_messages_id, work_experience_reserved1, 
+      work_experience_reserved2, work_experience_reserved3, 
+      work_experience_reserved4, work_experience_reserved5, 
+      work_experience_description)
+    values (#{workExperienceId,jdbcType=VARCHAR}, #{workExperienceCompany,jdbcType=VARCHAR}, 
+      #{workExperienceDepartment,jdbcType=VARCHAR}, #{workExperienceResponsibility,jdbcType=VARCHAR}, 
+      #{workExperienceStarttime,jdbcType=VARCHAR}, #{workExperienceOvertime,jdbcType=VARCHAR}, 
+      #{personalMessagesId,jdbcType=VARCHAR}, #{workExperienceReserved1,jdbcType=VARCHAR}, 
+      #{workExperienceReserved2,jdbcType=VARCHAR}, #{workExperienceReserved3,jdbcType=VARCHAR}, 
+      #{workExperienceReserved4,jdbcType=VARCHAR}, #{workExperienceReserved5,jdbcType=VARCHAR}, 
+      #{workExperienceDescription,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pmm.pojo.WorkExperience" >
+    insert into work_experience
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workExperienceId != null" >
+        work_experience_id,
+      </if>
+      <if test="workExperienceCompany != null" >
+        work_experience_company,
+      </if>
+      <if test="workExperienceDepartment != null" >
+        work_experience_department,
+      </if>
+      <if test="workExperienceResponsibility != null" >
+        work_experience_responsibility,
+      </if>
+      <if test="workExperienceStarttime != null" >
+        work_experience_starttime,
+      </if>
+      <if test="workExperienceOvertime != null" >
+        work_experience_overtime,
+      </if>
+      <if test="personalMessagesId != null" >
+        personal_messages_id,
+      </if>
+      <if test="workExperienceReserved1 != null" >
+        work_experience_reserved1,
+      </if>
+      <if test="workExperienceReserved2 != null" >
+        work_experience_reserved2,
+      </if>
+      <if test="workExperienceReserved3 != null" >
+        work_experience_reserved3,
+      </if>
+      <if test="workExperienceReserved4 != null" >
+        work_experience_reserved4,
+      </if>
+      <if test="workExperienceReserved5 != null" >
+        work_experience_reserved5,
+      </if>
+      <if test="workExperienceDescription != null" >
+        work_experience_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workExperienceId != null" >
+        #{workExperienceId,jdbcType=VARCHAR},
+      </if>
+      <if test="workExperienceCompany != null" >
+        #{workExperienceCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="workExperienceDepartment != null" >
+        #{workExperienceDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="workExperienceResponsibility != null" >
+        #{workExperienceResponsibility,jdbcType=VARCHAR},
+      </if>
+      <if test="workExperienceStarttime != null" >
+        #{workExperienceStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="workExperienceOvertime != null" >
+        #{workExperienceOvertime,jdbcType=VARCHAR},
+      </if>
+      <if test="personalMessagesId != null" >
+        #{personalMessagesId,jdbcType=VARCHAR},
+      </if>
+      <if test="workExperienceReserved1 != null" >
+        #{workExperienceReserved1,jdbcType=VARCHAR},
+      </if>
+      <if test="workExperienceReserved2 != null" >
+        #{workExperienceReserved2,jdbcType=VARCHAR},
+      </if>
+      <if test="workExperienceReserved3 != null" >
+        #{workExperienceReserved3,jdbcType=VARCHAR},
+      </if>
+      <if test="workExperienceReserved4 != null" >
+        #{workExperienceReserved4,jdbcType=VARCHAR},
+      </if>
+      <if test="workExperienceReserved5 != null" >
+        #{workExperienceReserved5,jdbcType=VARCHAR},
+      </if>
+      <if test="workExperienceDescription != null" >
+        #{workExperienceDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pmm.pojo.WorkExperienceExample" resultType="java.lang.Integer" >
+    select count(*) from work_experience
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update work_experience
+    <set >
+      <if test="record.workExperienceId != null" >
+        work_experience_id = #{record.workExperienceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workExperienceCompany != null" >
+        work_experience_company = #{record.workExperienceCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workExperienceDepartment != null" >
+        work_experience_department = #{record.workExperienceDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workExperienceResponsibility != null" >
+        work_experience_responsibility = #{record.workExperienceResponsibility,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workExperienceStarttime != null" >
+        work_experience_starttime = #{record.workExperienceStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workExperienceOvertime != null" >
+        work_experience_overtime = #{record.workExperienceOvertime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personalMessagesId != null" >
+        personal_messages_id = #{record.personalMessagesId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workExperienceReserved1 != null" >
+        work_experience_reserved1 = #{record.workExperienceReserved1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workExperienceReserved2 != null" >
+        work_experience_reserved2 = #{record.workExperienceReserved2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workExperienceReserved3 != null" >
+        work_experience_reserved3 = #{record.workExperienceReserved3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workExperienceReserved4 != null" >
+        work_experience_reserved4 = #{record.workExperienceReserved4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workExperienceReserved5 != null" >
+        work_experience_reserved5 = #{record.workExperienceReserved5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workExperienceDescription != null" >
+        work_experience_description = #{record.workExperienceDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update work_experience
+    set work_experience_id = #{record.workExperienceId,jdbcType=VARCHAR},
+      work_experience_company = #{record.workExperienceCompany,jdbcType=VARCHAR},
+      work_experience_department = #{record.workExperienceDepartment,jdbcType=VARCHAR},
+      work_experience_responsibility = #{record.workExperienceResponsibility,jdbcType=VARCHAR},
+      work_experience_starttime = #{record.workExperienceStarttime,jdbcType=VARCHAR},
+      work_experience_overtime = #{record.workExperienceOvertime,jdbcType=VARCHAR},
+      personal_messages_id = #{record.personalMessagesId,jdbcType=VARCHAR},
+      work_experience_reserved1 = #{record.workExperienceReserved1,jdbcType=VARCHAR},
+      work_experience_reserved2 = #{record.workExperienceReserved2,jdbcType=VARCHAR},
+      work_experience_reserved3 = #{record.workExperienceReserved3,jdbcType=VARCHAR},
+      work_experience_reserved4 = #{record.workExperienceReserved4,jdbcType=VARCHAR},
+      work_experience_reserved5 = #{record.workExperienceReserved5,jdbcType=VARCHAR},
+      work_experience_description = #{record.workExperienceDescription,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update work_experience
+    set work_experience_id = #{record.workExperienceId,jdbcType=VARCHAR},
+      work_experience_company = #{record.workExperienceCompany,jdbcType=VARCHAR},
+      work_experience_department = #{record.workExperienceDepartment,jdbcType=VARCHAR},
+      work_experience_responsibility = #{record.workExperienceResponsibility,jdbcType=VARCHAR},
+      work_experience_starttime = #{record.workExperienceStarttime,jdbcType=VARCHAR},
+      work_experience_overtime = #{record.workExperienceOvertime,jdbcType=VARCHAR},
+      personal_messages_id = #{record.personalMessagesId,jdbcType=VARCHAR},
+      work_experience_reserved1 = #{record.workExperienceReserved1,jdbcType=VARCHAR},
+      work_experience_reserved2 = #{record.workExperienceReserved2,jdbcType=VARCHAR},
+      work_experience_reserved3 = #{record.workExperienceReserved3,jdbcType=VARCHAR},
+      work_experience_reserved4 = #{record.workExperienceReserved4,jdbcType=VARCHAR},
+      work_experience_reserved5 = #{record.workExperienceReserved5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
