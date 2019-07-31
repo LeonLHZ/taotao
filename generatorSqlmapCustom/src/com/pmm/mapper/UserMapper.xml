@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pmm.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.pmm.pojo.User" >
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_username" property="userUsername" jdbcType="VARCHAR" />
+    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="user_type" property="userType" jdbcType="VARCHAR" />
+    <result column="user_reserved2" property="userReserved2" jdbcType="VARCHAR" />
+    <result column="user_reserved3" property="userReserved3" jdbcType="VARCHAR" />
+    <result column="user_reserved4" property="userReserved4" jdbcType="VARCHAR" />
+    <result column="user_reserved5" property="userReserved5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_id, user_username, user_password, user_type, user_reserved2, user_reserved3, 
+    user_reserved4, user_reserved5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pmm.pojo.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.pmm.pojo.UserExample" >
+    delete from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pmm.pojo.User" >
+    insert into user (user_id, user_username, user_password, 
+      user_type, user_reserved2, user_reserved3, 
+      user_reserved4, user_reserved5)
+    values (#{userId,jdbcType=VARCHAR}, #{userUsername,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
+      #{userType,jdbcType=VARCHAR}, #{userReserved2,jdbcType=VARCHAR}, #{userReserved3,jdbcType=VARCHAR}, 
+      #{userReserved4,jdbcType=VARCHAR}, #{userReserved5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pmm.pojo.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userUsername != null" >
+        user_username,
+      </if>
+      <if test="userPassword != null" >
+        user_password,
+      </if>
+      <if test="userType != null" >
+        user_type,
+      </if>
+      <if test="userReserved2 != null" >
+        user_reserved2,
+      </if>
+      <if test="userReserved3 != null" >
+        user_reserved3,
+      </if>
+      <if test="userReserved4 != null" >
+        user_reserved4,
+      </if>
+      <if test="userReserved5 != null" >
+        user_reserved5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userUsername != null" >
+        #{userUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="userReserved2 != null" >
+        #{userReserved2,jdbcType=VARCHAR},
+      </if>
+      <if test="userReserved3 != null" >
+        #{userReserved3,jdbcType=VARCHAR},
+      </if>
+      <if test="userReserved4 != null" >
+        #{userReserved4,jdbcType=VARCHAR},
+      </if>
+      <if test="userReserved5 != null" >
+        #{userReserved5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pmm.pojo.UserExample" resultType="java.lang.Integer" >
+    select count(*) from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user
+    <set >
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userUsername != null" >
+        user_username = #{record.userUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPassword != null" >
+        user_password = #{record.userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userType != null" >
+        user_type = #{record.userType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userReserved2 != null" >
+        user_reserved2 = #{record.userReserved2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userReserved3 != null" >
+        user_reserved3 = #{record.userReserved3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userReserved4 != null" >
+        user_reserved4 = #{record.userReserved4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userReserved5 != null" >
+        user_reserved5 = #{record.userReserved5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user
+    set user_id = #{record.userId,jdbcType=VARCHAR},
+      user_username = #{record.userUsername,jdbcType=VARCHAR},
+      user_password = #{record.userPassword,jdbcType=VARCHAR},
+      user_type = #{record.userType,jdbcType=VARCHAR},
+      user_reserved2 = #{record.userReserved2,jdbcType=VARCHAR},
+      user_reserved3 = #{record.userReserved3,jdbcType=VARCHAR},
+      user_reserved4 = #{record.userReserved4,jdbcType=VARCHAR},
+      user_reserved5 = #{record.userReserved5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pmm.mapper.PersonalMessagesMapper" >
+  <resultMap id="BaseResultMap" type="com.pmm.pojo.PersonalMessages" >
+    <result column="personal_messages_id" property="personalMessagesId" jdbcType="VARCHAR" />
+    <result column="personal_messages_name" property="personalMessagesName" jdbcType="VARCHAR" />
+    <result column="personal_messages_sex" property="personalMessagesSex" jdbcType="VARCHAR" />
+    <result column="personal_messages_old" property="personalMessagesOld" jdbcType="VARCHAR" />
+    <result column="personal_messages_phone" property="personalMessagesPhone" jdbcType="VARCHAR" />
+    <result column="personal_messages_idcard_number" property="personalMessagesIdcardNumber" jdbcType="VARCHAR" />
+    <result column="personal_messages_native_place" property="personalMessagesNativePlace" jdbcType="VARCHAR" />
+    <result column="personal_messages_current_address" property="personalMessagesCurrentAddress" jdbcType="VARCHAR" />
+    <result column="personal_messages_reserved1" property="personalMessagesReserved1" jdbcType="VARCHAR" />
+    <result column="personal_messages_reserved2" property="personalMessagesReserved2" jdbcType="VARCHAR" />
+    <result column="personal_messages_reserved3" property="personalMessagesReserved3" jdbcType="VARCHAR" />
+    <result column="personal_messages_reserved4" property="personalMessagesReserved4" jdbcType="VARCHAR" />
+    <result column="personal_messages_reserved5" property="personalMessagesReserved5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    personal_messages_id, personal_messages_name, personal_messages_sex, personal_messages_old, 
+    personal_messages_phone, personal_messages_idcard_number, personal_messages_native_place, 
+    personal_messages_current_address, personal_messages_reserved1, personal_messages_reserved2, 
+    personal_messages_reserved3, personal_messages_reserved4, personal_messages_reserved5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pmm.pojo.PersonalMessagesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from personal_messages
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.pmm.pojo.PersonalMessagesExample" >
+    delete from personal_messages
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pmm.pojo.PersonalMessages" >
+    insert into personal_messages (personal_messages_id, personal_messages_name, 
+      personal_messages_sex, personal_messages_old, 
+      personal_messages_phone, personal_messages_idcard_number, 
+      personal_messages_native_place, personal_messages_current_address, 
+      personal_messages_reserved1, personal_messages_reserved2, 
+      personal_messages_reserved3, personal_messages_reserved4, 
+      personal_messages_reserved5)
+    values (#{personalMessagesId,jdbcType=VARCHAR}, #{personalMessagesName,jdbcType=VARCHAR}, 
+      #{personalMessagesSex,jdbcType=VARCHAR}, #{personalMessagesOld,jdbcType=VARCHAR}, 
+      #{personalMessagesPhone,jdbcType=VARCHAR}, #{personalMessagesIdcardNumber,jdbcType=VARCHAR}, 
+      #{personalMessagesNativePlace,jdbcType=VARCHAR}, #{personalMessagesCurrentAddress,jdbcType=VARCHAR}, 
+      #{personalMessagesReserved1,jdbcType=VARCHAR}, #{personalMessagesReserved2,jdbcType=VARCHAR}, 
+      #{personalMessagesReserved3,jdbcType=VARCHAR}, #{personalMessagesReserved4,jdbcType=VARCHAR}, 
+      #{personalMessagesReserved5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pmm.pojo.PersonalMessages" >
+    insert into personal_messages
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="personalMessagesId != null" >
+        personal_messages_id,
+      </if>
+      <if test="personalMessagesName != null" >
+        personal_messages_name,
+      </if>
+      <if test="personalMessagesSex != null" >
+        personal_messages_sex,
+      </if>
+      <if test="personalMessagesOld != null" >
+        personal_messages_old,
+      </if>
+      <if test="personalMessagesPhone != null" >
+        personal_messages_phone,
+      </if>
+      <if test="personalMessagesIdcardNumber != null" >
+        personal_messages_idcard_number,
+      </if>
+      <if test="personalMessagesNativePlace != null" >
+        personal_messages_native_place,
+      </if>
+      <if test="personalMessagesCurrentAddress != null" >
+        personal_messages_current_address,
+      </if>
+      <if test="personalMessagesReserved1 != null" >
+        personal_messages_reserved1,
+      </if>
+      <if test="personalMessagesReserved2 != null" >
+        personal_messages_reserved2,
+      </if>
+      <if test="personalMessagesReserved3 != null" >
+        personal_messages_reserved3,
+      </if>
+      <if test="personalMessagesReserved4 != null" >
+        personal_messages_reserved4,
+      </if>
+      <if test="personalMessagesReserved5 != null" >
+        personal_messages_reserved5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="personalMessagesId != null" >
+        #{personalMessagesId,jdbcType=VARCHAR},
+      </if>
+      <if test="personalMessagesName != null" >
+        #{personalMessagesName,jdbcType=VARCHAR},
+      </if>
+      <if test="personalMessagesSex != null" >
+        #{personalMessagesSex,jdbcType=VARCHAR},
+      </if>
+      <if test="personalMessagesOld != null" >
+        #{personalMessagesOld,jdbcType=VARCHAR},
+      </if>
+      <if test="personalMessagesPhone != null" >
+        #{personalMessagesPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="personalMessagesIdcardNumber != null" >
+        #{personalMessagesIdcardNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="personalMessagesNativePlace != null" >
+        #{personalMessagesNativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="personalMessagesCurrentAddress != null" >
+        #{personalMessagesCurrentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="personalMessagesReserved1 != null" >
+        #{personalMessagesReserved1,jdbcType=VARCHAR},
+      </if>
+      <if test="personalMessagesReserved2 != null" >
+        #{personalMessagesReserved2,jdbcType=VARCHAR},
+      </if>
+      <if test="personalMessagesReserved3 != null" >
+        #{personalMessagesReserved3,jdbcType=VARCHAR},
+      </if>
+      <if test="personalMessagesReserved4 != null" >
+        #{personalMessagesReserved4,jdbcType=VARCHAR},
+      </if>
+      <if test="personalMessagesReserved5 != null" >
+        #{personalMessagesReserved5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pmm.pojo.PersonalMessagesExample" resultType="java.lang.Integer" >
+    select count(*) from personal_messages
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update personal_messages
+    <set >
+      <if test="record.personalMessagesId != null" >
+        personal_messages_id = #{record.personalMessagesId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personalMessagesName != null" >
+        personal_messages_name = #{record.personalMessagesName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personalMessagesSex != null" >
+        personal_messages_sex = #{record.personalMessagesSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personalMessagesOld != null" >
+        personal_messages_old = #{record.personalMessagesOld,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personalMessagesPhone != null" >
+        personal_messages_phone = #{record.personalMessagesPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personalMessagesIdcardNumber != null" >
+        personal_messages_idcard_number = #{record.personalMessagesIdcardNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personalMessagesNativePlace != null" >
+        personal_messages_native_place = #{record.personalMessagesNativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personalMessagesCurrentAddress != null" >
+        personal_messages_current_address = #{record.personalMessagesCurrentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personalMessagesReserved1 != null" >
+        personal_messages_reserved1 = #{record.personalMessagesReserved1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personalMessagesReserved2 != null" >
+        personal_messages_reserved2 = #{record.personalMessagesReserved2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personalMessagesReserved3 != null" >
+        personal_messages_reserved3 = #{record.personalMessagesReserved3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personalMessagesReserved4 != null" >
+        personal_messages_reserved4 = #{record.personalMessagesReserved4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personalMessagesReserved5 != null" >
+        personal_messages_reserved5 = #{record.personalMessagesReserved5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update personal_messages
+    set personal_messages_id = #{record.personalMessagesId,jdbcType=VARCHAR},
+      personal_messages_name = #{record.personalMessagesName,jdbcType=VARCHAR},
+      personal_messages_sex = #{record.personalMessagesSex,jdbcType=VARCHAR},
+      personal_messages_old = #{record.personalMessagesOld,jdbcType=VARCHAR},
+      personal_messages_phone = #{record.personalMessagesPhone,jdbcType=VARCHAR},
+      personal_messages_idcard_number = #{record.personalMessagesIdcardNumber,jdbcType=VARCHAR},
+      personal_messages_native_place = #{record.personalMessagesNativePlace,jdbcType=VARCHAR},
+      personal_messages_current_address = #{record.personalMessagesCurrentAddress,jdbcType=VARCHAR},
+      personal_messages_reserved1 = #{record.personalMessagesReserved1,jdbcType=VARCHAR},
+      personal_messages_reserved2 = #{record.personalMessagesReserved2,jdbcType=VARCHAR},
+      personal_messages_reserved3 = #{record.personalMessagesReserved3,jdbcType=VARCHAR},
+      personal_messages_reserved4 = #{record.personalMessagesReserved4,jdbcType=VARCHAR},
+      personal_messages_reserved5 = #{record.personalMessagesReserved5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
